@@ -12,6 +12,13 @@ image-version: 44 # latest is also supported if you want new updates ASAP
 modules:
   - type: signing
   - type: dnf
+    repos:
+      cleanup: true
     install:
       packages:
-        - ghostty # VSCodium, alternative to VSCode
+        - repo: terra
+          packages:
+            - ghostty
+
+
+      
