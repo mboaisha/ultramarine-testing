@@ -13,12 +13,15 @@ modules:
   - type: signing
   - type: dnf
     repos:
+      files:
+        - https://raw.githubusercontent.com/terrapkg/subatomic-repos/main/terra.repo
       cleanup: true
     install:
+      install-weak-deps: false
       packages:
-        - repo: terra
-          packages:
-            - ghostty
+        - ghostty
+        - swayfx
+        - mangowm
 
 
       
