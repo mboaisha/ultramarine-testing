@@ -6,7 +6,7 @@ name: um-experiment
 description: Testing and experimenting with Ultramarine images
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: docker pull ghcr.io/ultramarine-linux/base-bootc
+base-image: ghcr.io/ultramarine-linux/base-bootc
 image-version: 44 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
