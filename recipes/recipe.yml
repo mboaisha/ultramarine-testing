@@ -9,7 +9,32 @@ description: Testing and experimenting with Ultramarine images
 base-image: ghcr.io/ultramarine-linux/base-bootc
 image-version: 44 # latest is also supported if you want new updates ASAP
 
-# module configuration, executed in order
-# you can include multiple instances of the same module
 modules:
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+  - type: signing
+  - type: dnf
+    repos:
+      cleanup: true
+      files:
+        - vscodium.repo
+      keys:
+        - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+    install:
+      packages:
+        - codium # VSCodium, alternative to VSCode
+        - zsh # zsh is available in Fedora repos
+    group-install: # Install virtualization tooling
+      with-optional: true
+      packages:
+        - virtualization
+  - type: default-flatpaks
+    configurations:
+      - scope: user
+        notify: false
+        repo:
+          url: https://flathub.org/repo/flathub.flatpakrepo
+          title: Flathub (system)
+        install:
+          - io.podman_desktop.PodmanDesktop # Podman desktop
+          - me.iepure.devtoolbox # useful devtools
+          #- com.github.marhkb.Pods
+          - com.ranfdev.DistroShelf # Mange distrbox via GUI
